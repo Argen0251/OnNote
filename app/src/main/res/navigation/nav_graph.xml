@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/onBoardFragment">
+
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardFragment"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board" />
+    <fragment
+        android:id="@+id/onBoardPagerFragment"
+        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardPagerFragment"
+        android:label="fragment_on_board_pager"
+        tools:layout="@layout/fragment_on_board_pager" />
+</navigation>

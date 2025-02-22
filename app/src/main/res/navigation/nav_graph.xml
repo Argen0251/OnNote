@@ -45,5 +45,7 @@
         android:id="@+id/noteDetailFragment"
         android:name="com.example.onnote.ui.fragments.note.NoteDetailFragment"
         android:label="fragment_note_detail"
-        tools:layout="@layout/fragment_note_detail" />
+        tools:layout="@layout/fragment_note_detail">
+
+    </fragment>
 </navigation>

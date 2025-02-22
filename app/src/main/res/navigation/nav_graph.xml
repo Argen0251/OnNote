@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/onBoardFragment">
+
+    <fragment
+        android:id="@+id/onBoardFragment"
+        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardFragment"
+        android:label="fragment_on_board"
+        tools:layout="@layout/fragment_on_board">
+
+        <action
+            android:id="@+id/action_onBoardFragment_to_noteFragment"
+            app:destination="@id/noteFragment"
+            app:popUpTo="@id/onBoardFragment"
+            app:popUpToInclusive="true"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/onBoardPagerFragment"
+        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardPagerFragment"
+        android:label="fragment_on_board_pager"
+        tools:layout="@layout/fragment_on_board_pager" />
+    <fragment
+        android:id="@+id/noteFragment"
+        android:name="com.example.onnote.ui.fragments.note.NoteFragment"
+        android:label="fragment_note"
+        tools:layout="@layout/fragment_note" >
+        <action
+            android:id="@+id/action_noteFragment_to_noteDetailFragment"
+            app:destination="@id/noteDetailFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/noteDetailFragment"
+        android:name="com.example.onnote.ui.fragments.note.NoteDetailFragment"
+        android:label="fragment_note_detail"
+        tools:layout="@layout/fragment_note_detail">
+
+    </fragment>
+</navigation>

@@ -47,5 +47,8 @@
         android:label="fragment_note_detail"
         tools:layout="@layout/fragment_note_detail">
 
+        <argument
+            android:name="noteId"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -16,12 +16,13 @@
     import com.example.onnote.ui.App
     import com.example.onnote.ui.adapters.NoteAdapter
     import com.example.onnote.ui.data.models.NoteModels
+    import com.example.onnote.ui.interfaces.OnClickIten
 
-    class NoteDetailFragment : Fragment() {
+    class NoteDetailFragment : Fragment(), OnClickIten {
 
         private lateinit var bidind:FragmentNoteDetailBinding
 
-        private val noteAdapter = NoteAdapter()
+        private val noteAdapter = NoteAdapter(this)
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -68,5 +69,9 @@
             bidind.txtTitle.addTextChangedListener(textWatcher)
             bidind.txtDescription.addTextChangedListener(textWatcher)
             bidind.btnAdd.visibility = View.GONE        }
+
+        override fun onLongClick(noteModels: NoteModels) {
+            TODO("Not yet implemented")
+        }
 
     }

@@ -21,8 +21,8 @@
     class NoteDetailFragment : Fragment(), OnClickIten {
 
         private lateinit var bidind:FragmentNoteDetailBinding
-
-        private val noteAdapter = NoteAdapter(this)
+        private var noteId = -1
+        private val noteAdapter = NoteAdapter(this, this    )
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -37,16 +37,39 @@
             setupListener()
             val currentTime = NoteModels.currentTime()
             bidind.txtTime.text = NoteModels.currentTime()
+            updateNote()
             setupTextWatcher()
         }
 
-        private fun setupListener() = with(bidind){
-            btnAdd.setOnClickListener{
-                val edTitle:String  = txtTitle.text.toString()
-                val edDescription:String= txtDescription.text.toString()
-                App.appDatabase1?.noteDao()?.insert(NoteModels(edTitle,edDescription))
+        private fun updateNote() {
+            arguments?.let{
+                noteId = it.getInt("noteId", -1)
+            }
+            if (noteId != -1){
+                val id = App.appDatabase1?.noteDao()?.getById(noteId)
+                id?.let {model->
+                    bidind.txtTitle.setText(model.title)
+                    bidind.txtDescription.setText(model.description)
+                }
+            }
+        }
+
+        private fun setupListener() = with(bidind) {
+            btnAdd.setOnClickListener {
+                val edTitle: String = txtTitle.text.toString()
+                val edDescription: String = txtDescription.text.toString()
+
+                if (noteId != -1) {
+                    val updateNote = NoteModels(edTitle, edDescription)
+                    updateNote.id = noteId
+                    App.appDatabase1?.noteDao()?.updateNote(updateNote)
+                } else {
+                    App.appDatabase1?.noteDao()?.insert(NoteModels(edTitle, edDescription))
+                }
+
                 findNavController().navigateUp()
             }
+
             back.setOnClickListener {
                 findNavController().navigateUp()
             }
@@ -71,6 +94,10 @@
             bidind.btnAdd.visibility = View.GONE        }
 
         override fun onLongClick(noteModels: NoteModels) {
+            TODO("Not yet implemented")
+        }
+
+        override fun onClick(noteModels: NoteModels) {
             TODO("Not yet implemented")
         }
 

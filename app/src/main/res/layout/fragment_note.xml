@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
     <ImageView
+        android:id="@+id/btnChangeLayout"
         android:layout_width="18dp"
         android:layout_height="16dp"
         android:src="@drawable/grid"

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.onnote.R
@@ -19,7 +20,7 @@ import com.example.onnote.ui.utils.PreferenceHelper
 
 
 class NoteFragment : Fragment(),OnClickIten {
-
+    private var isLinearLayout = true
     private lateinit var binding: FragmentNoteBinding
     private val shared = PreferenceHelper()
     private val noteAdapter = NoteAdapter(this, this)
@@ -43,6 +44,16 @@ class NoteFragment : Fragment(),OnClickIten {
     private fun setupListener() {
         binding.btnAction.setOnClickListener{
             findNavController().navigate(R.id.action_noteFragment_to_noteDetailFragment)
+        }
+        binding.btnChangeLayout.setOnClickListener {
+            if (isLinearLayout) {
+                binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.btnChangeLayout.setImageResource(R.drawable.grid)
+            } else {
+                binding.rvNote.layoutManager = LinearLayoutManager(requireContext())
+                binding.btnChangeLayout.setImageResource(R.drawable.linear)
+            }
+            isLinearLayout = !isLinearLayout
         }
     }
     private fun initialize() {

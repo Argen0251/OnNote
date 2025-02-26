@@ -1,4 +1,5 @@
 package com.example.onnote.ui.fragments.note
+import NoteAdapter
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteBinding
 import com.example.onnote.ui.App
-import com.example.onnote.ui.adapters.NoteAdapter
 import com.example.onnote.ui.data.models.NoteModels
 import com.example.onnote.ui.interfaces.OnClickIten
 import com.example.onnote.ui.utils.PreferenceHelper

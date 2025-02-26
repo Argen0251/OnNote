@@ -25,4 +25,6 @@ interface NoteDao {
     @Query("SELECT * FROM notemodels WHERE id = :id")
     fun getById(id:Int):NoteModels?
 
+    @Query("UPDATE noteModels SET backgroundColor = :color WHERE id = :id")
+    fun updateBackgroundColor(id: Int, color: Int)
 }

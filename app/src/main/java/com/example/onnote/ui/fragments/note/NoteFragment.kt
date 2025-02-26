@@ -48,10 +48,10 @@ class NoteFragment : Fragment(),OnClickIten {
         binding.btnChangeLayout.setOnClickListener {
             if (isLinearLayout) {
                 binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.btnChangeLayout.setImageResource(R.drawable.grid)
+                binding.btnChangeLayout.setImageResource(R.drawable.linear)
             } else {
                 binding.rvNote.layoutManager = LinearLayoutManager(requireContext())
-                binding.btnChangeLayout.setImageResource(R.drawable.linear)
+                binding.btnChangeLayout.setImageResource(R.drawable.grid)
             }
             isLinearLayout = !isLinearLayout
         }

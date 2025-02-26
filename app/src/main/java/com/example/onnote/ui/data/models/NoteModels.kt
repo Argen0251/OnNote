@@ -11,7 +11,8 @@ import java.util.Locale
 data class NoteModels(
     val title: String,
     val description: String,
-    val time: String = currentTime()
+    val time: String = currentTime(),
+    var backgroundColor: Int = -1
 ) {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0

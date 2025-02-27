@@ -1,5 +1,5 @@
 package com.example.onnote.ui.fragments.note
-import NoteAdapter
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,20 +10,22 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.navOptions
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView //оно не активно может дело этом?
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteBinding
 import com.example.onnote.ui.App
+import com.example.onnote.ui.adapters.NoteAdapter
 import com.example.onnote.ui.data.models.NoteModels
 import com.example.onnote.ui.interfaces.OnClickIten
 import com.example.onnote.ui.utils.PreferenceHelper
 
 
-class NoteFragment : Fragment(),OnClickIten {
-    private var isLinearLayout = true
+class NoteFragment : Fragment(), OnClickIten {
+
     private lateinit var binding: FragmentNoteBinding
     private val shared = PreferenceHelper()
     private val noteAdapter = NoteAdapter(this, this)
+    private var isLinearLayout = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +33,7 @@ class NoteFragment : Fragment(),OnClickIten {
     ): View {
         binding= FragmentNoteBinding.inflate(inflater,container,false)
         return binding.root
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,12 +42,19 @@ class NoteFragment : Fragment(),OnClickIten {
         initialize()
         loadNotes()
         getData()
+
     }
+    override fun onResume() {
+        super.onResume()
+        loadNotes()
+    }
+
 
     private fun setupListener() {
         binding.btnAction.setOnClickListener{
             findNavController().navigate(R.id.action_noteFragment_to_noteDetailFragment)
         }
+        //изменение по кнопке
         binding.btnChangeLayout.setOnClickListener {
             if (isLinearLayout) {
                 binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -55,6 +65,9 @@ class NoteFragment : Fragment(),OnClickIten {
             }
             isLinearLayout = !isLinearLayout
         }
+    }
+    fun Int.dpToPx(context: Context): Int {
+        return (this * context.resources.displayMetrics.density).toInt()
     }
     private fun initialize() {
         binding.rvNote.apply {

@@ -3,11 +3,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="orange">#F86232</color>
-    <color name="red">#E91E63</color>
-    <color name="purple">#9C27B0</color>
-    <color name="blue">#2196F3</color>
-    <color name="yellaw">#FFC107</color>
-    <color name="green">#4CAF50</color>
+    <color name="first">#FFF599</color>
+    <color name="second">#B69CFF</color>
+    <color name="third">#FF9E9E</color>
+    <color name="four">#FFC107</color>
+    <color name="five">#91F48F</color>
+    <color name="six">#9EFFFF</color>
 
 
 </resources>

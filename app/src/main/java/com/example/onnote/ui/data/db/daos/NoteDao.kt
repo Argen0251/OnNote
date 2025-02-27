@@ -23,7 +23,8 @@ interface NoteDao {
     fun updateNote(noteModel: NoteModels)
 
     @Query("SELECT * FROM notemodels WHERE id = :id")
-    fun getById(id:Int):NoteModels?
+    fun getById(id: Int): LiveData<NoteModels?>
+
 
     @Query("UPDATE noteModels SET backgroundColor = :color WHERE id = :id")
     fun updateBackgroundColor(id: Int, color: Int)

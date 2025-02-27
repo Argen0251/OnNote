@@ -42,7 +42,7 @@ android {
 }
 
 dependencies {
-
+    implementation (libs.androidx.recyclerview)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -58,8 +58,7 @@ dependencies {
 //анимация лотти
     implementation (libs.lottie)
     // room
-     val room_version = "2.6.1"
    implementation(libs.androidx.room.ktx)
-    ksp("androidx.room:room-compiler:$room_version")
+    ksp(libs.androidx.room.compiler)
 
 }

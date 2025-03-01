@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#252525"
+    tools:context=".ui.fragments.singin.AuthFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:fontFamily="@font/potta_one"
+        android:textSize="24dp"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="52dp"/>
+    <ImageView
+        android:id="@+id/ic_auth"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:src="@drawable/ic_auth"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="30dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#FFFFFF"
+        android:text="Авторизация"
+        android:fontFamily="@font/roboto"
+        android:textSize="18dp"
+        app:layout_constraintTop_toBottomOf="@id/ic_auth"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="32dp"
+        />
+
+    <com.google.android.material.button.MaterialButton
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/btnSignIn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Sign in with Google"
+        android:textColor="#1F1F1F"
+        android:textSize="14sp"
+        android:backgroundTint="@color/white"
+        android:fontFamily="@font/roboto"
+        app:icon="@drawable/ic_2"
+        app:iconSize="18dp"
+        app:iconGravity="textStart"
+        app:iconPadding="8dp"
+        app:cornerRadius="24dp"
+        app:strokeColor="@color/grey"
+        app:iconTint="@null"
+        app:strokeWidth="1dp"
+        android:paddingVertical="12dp"
+        android:textAllCaps="false"
+        android:layout_marginBottom="100dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

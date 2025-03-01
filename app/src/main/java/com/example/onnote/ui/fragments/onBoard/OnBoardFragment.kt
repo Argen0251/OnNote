@@ -31,7 +31,7 @@ class OnBoardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         shared.unit(requireContext())
         if (shared.onBoardShown) {
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_auth)
         }
         initialize()
         setupListener()
@@ -52,7 +52,7 @@ class OnBoardFragment : Fragment() {
         })
         binding.btnBegin.setOnClickListener {
             shared.onBoardShown = true
-            findNavController().navigate(R.id.action_onBoardFragment_to_noteFragment)
+            findNavController().navigate(R.id.action_onBoardFragment_to_auth)
         }
     }
 

@@ -25,7 +25,7 @@ class NoteDetailFragment : Fragment(), OnClickIten {
 
     private lateinit var bidind: FragmentNoteDetailBinding
     private var noteId = -1
-    private val noteAdapter = NoteAdapter(this, this)
+    private val noteAdapter = NoteAdapter(this, this,true)
     private var selectedBackgroundColor: Int = Color.WHITE
 
     override fun onCreateView(

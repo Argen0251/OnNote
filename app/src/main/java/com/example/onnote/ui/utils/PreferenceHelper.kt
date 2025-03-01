@@ -16,4 +16,8 @@ class PreferenceHelper {
     var onBoardShown :Boolean
         get()= sharedPreferences.getBoolean("onboard",false)
         set(value:Boolean)= sharedPreferences.edit().putBoolean("onboard",value).apply()
+
+    var authShown: Boolean
+        get() = sharedPreferences.getBoolean("authShown", false)
+        set(value) = sharedPreferences.edit().putBoolean("authShown", value).apply()
 }

@@ -4,6 +4,7 @@ plugins {
     id("com.google.devtools.ksp")
     id("kotlin-parcelize")
     id("androidx.navigation.safeargs.kotlin")
+    id("com.google.gms.google-services")
 }
 
 android {
@@ -48,6 +49,10 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+    implementation(libs.googleid)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,4 +66,9 @@ dependencies {
    implementation(libs.androidx.room.ktx)
     ksp(libs.androidx.room.compiler)
 
+    //firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
+    //google auth
+    implementation(libs.play.services.auth)
 }

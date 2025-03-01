@@ -24,7 +24,7 @@ class NoteFragment : Fragment(), OnClickIten {
 
     private lateinit var binding: FragmentNoteBinding
     private val shared = PreferenceHelper()
-    private val noteAdapter = NoteAdapter(this, this)
+    private val noteAdapter = NoteAdapter(this, this,true)
     private var isLinearLayout = true
 
     override fun onCreateView(
@@ -54,16 +54,20 @@ class NoteFragment : Fragment(), OnClickIten {
         binding.btnAction.setOnClickListener{
             findNavController().navigate(R.id.action_noteFragment_to_noteDetailFragment)
         }
+
         //изменение по кнопке
         binding.btnChangeLayout.setOnClickListener {
+            isLinearLayout = !isLinearLayout
+            noteAdapter.setLayout(isLinearLayout)
             if (isLinearLayout) {
-                binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
-                binding.btnChangeLayout.setImageResource(R.drawable.linear)
-            } else {
                 binding.rvNote.layoutManager = LinearLayoutManager(requireContext())
                 binding.btnChangeLayout.setImageResource(R.drawable.grid)
+            } else {
+                binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
+                binding.btnChangeLayout.setImageResource(R.drawable.linear)
             }
-            isLinearLayout = !isLinearLayout
+            binding.rvNote.adapter = noteAdapter
+            noteAdapter.notifyDataSetChanged()
         }
     }
     fun Int.dpToPx(context: Context): Int {

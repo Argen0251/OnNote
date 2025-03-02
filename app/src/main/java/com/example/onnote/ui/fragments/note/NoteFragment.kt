@@ -71,7 +71,7 @@ class NoteFragment : Fragment(), OnClickIten {
             val navController = binding.root.findNavController()
 
             when (menuItem.itemId) {
-                R.id.nav_home -> navController.navigate(R.id.action_noteFragment_to_noteDetailFragment)
+                R.id.nav_home -> navController.navigate(R.id.noteFragment)
                 R.id.nav_onboard -> {
                     val bundle = Bundle()
                     bundle.putBoolean("fromMenu", true)

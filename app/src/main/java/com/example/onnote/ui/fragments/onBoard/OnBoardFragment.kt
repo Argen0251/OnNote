@@ -30,7 +30,8 @@ class OnBoardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         shared.unit(requireContext())
-        if (shared.onBoardShown) {
+        val isFromMenu = arguments?.getBoolean("fromMenu", false) ?: false
+        if (!isFromMenu && shared.onBoardShown) {
             findNavController().navigate(R.id.action_onBoardFragment_to_auth)
         }
         initialize()

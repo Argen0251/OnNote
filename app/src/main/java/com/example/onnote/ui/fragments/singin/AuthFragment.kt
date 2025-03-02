@@ -65,7 +65,8 @@ class AuthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //проверка
-        if (shared.authShown) {
+        val isFromMenu = arguments?.getBoolean("fromMenu", false) ?: false
+        if (!isFromMenu && shared.authShown) {
             findNavController().navigate(R.id.noteFragment)
         } else {
             setupListeners()
@@ -94,7 +95,7 @@ class AuthFragment : Fragment() {
     private fun updateUI(user: FirebaseUser?) {
         if (user != null) {
             shared.authShown = true
-                findNavController().navigate(R.id.noteFragment)
+            findNavController().navigate(R.id.noteFragment)
         } else {
             Toast.makeText(requireContext(), "Ошибка аутентификации", Toast.LENGTH_SHORT).show()
         }

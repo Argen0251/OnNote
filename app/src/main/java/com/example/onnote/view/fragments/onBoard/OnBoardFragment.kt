@@ -1,4 +1,4 @@
-package com.example.onnote.ui.fragments.onBoard
+package com.example.onnote.view.fragments.onBoard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,10 +9,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentOnBoardBinding
-import com.example.onnote.ui.utils.PreferenceHelper
+import com.example.onnote.model.PreferenceHelper
 import com.google.android.material.tabs.TabLayoutMediator
 import androidx.core.content.ContextCompat
-import com.example.onnote.ui.adapters.OnBoardAdapter
+import com.example.onnote.view.adapters.OnBoardAdapter
 
 class OnBoardFragment : Fragment() {
 

@@ -1,4 +1,4 @@
-package com.example.onnote.ui.utils
+package com.example.onnote.model
 
 import android.content.Context
 import android.content.SharedPreferences

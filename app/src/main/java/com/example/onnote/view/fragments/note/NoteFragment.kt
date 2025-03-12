@@ -1,12 +1,14 @@
-package com.example.onnote.ui.fragments.note
+package com.example.onnote.view.fragments.note
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
@@ -16,13 +18,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteBinding
-import com.example.onnote.ui.App
-import com.example.onnote.ui.GridSpacingItemDecoration
-import com.example.onnote.ui.adapters.NoteAdapter
-import com.example.onnote.ui.data.models.NoteModels
-import com.example.onnote.ui.interfaces.OnClickIten
-import com.example.onnote.ui.utils.PreferenceHelper
+import com.example.onnote.view.utils.App
+import com.example.onnote.view.utils.GridSpacingItemDecoration
+import com.example.onnote.view.adapters.NoteAdapter
+import com.example.onnote.model.data.models.NoteModels
+import com.example.onnote.view.interfaces.OnClickIten
+import com.example.onnote.model.PreferenceHelper
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class NoteFragment : Fragment(), OnClickIten {
 
@@ -32,7 +35,7 @@ class NoteFragment : Fragment(), OnClickIten {
     private var isLinearLayout = true
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
-
+    private lateinit var allNotes: List<NoteModels>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,6 +56,8 @@ class NoteFragment : Fragment(), OnClickIten {
         loadNotes()
         getData()
         isLinearLayout = shared.getLayoutState(requireContext())
+        updateHeader()
+        setupSearch()
     }
 
     override fun onResume() {
@@ -110,7 +115,12 @@ class NoteFragment : Fragment(), OnClickIten {
                 binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
                 binding.btnChangeLayout.setImageResource(R.drawable.linear)
                 binding.rvNote.addItemDecoration(
-                    GridSpacingItemDecoration(2, 8.dpToPx(requireContext()), 20.dpToPx(requireContext()), 0.dpToPx(requireContext()))
+                    GridSpacingItemDecoration(
+                        2,
+                        8.dpToPx(requireContext()),
+                        20.dpToPx(requireContext()),
+                        0.dpToPx(requireContext())
+                    )
                 )
             }
             binding.rvNote.adapter = noteAdapter
@@ -130,7 +140,12 @@ class NoteFragment : Fragment(), OnClickIten {
             binding.rvNote.layoutManager = GridLayoutManager(requireContext(), 2)
             binding.btnChangeLayout.setImageResource(R.drawable.linear)
             binding.rvNote.addItemDecoration(
-                GridSpacingItemDecoration(2, 8.dpToPx(requireContext()), 20.dpToPx(requireContext()), 0.dpToPx(requireContext()))
+                GridSpacingItemDecoration(
+                    2,
+                    8.dpToPx(requireContext()),
+                    20.dpToPx(requireContext()),
+                    0.dpToPx(requireContext())
+                )
             )
         }
         binding.rvNote.adapter = noteAdapter
@@ -139,6 +154,7 @@ class NoteFragment : Fragment(), OnClickIten {
     private fun loadNotes() {
         App.appDatabase1?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { notes ->
             noteAdapter.submitList(notes)
+            allNotes = notes
         }
     }
 
@@ -164,4 +180,38 @@ class NoteFragment : Fragment(), OnClickIten {
         val action = NoteFragmentDirections.actionNoteFragmentToNoteDetailFragment(noteModels.id)
         findNavController().navigate(action)
     }
+    //для получение емейла и вставление в хидер
+    private fun updateHeader() {
+        val headerView = navView.getHeaderView(0)
+        val emailTextView = headerView.findViewById<TextView>(R.id.textViewEmail)
+
+        val user = FirebaseAuth.getInstance().currentUser
+        emailTextView.text = user?.email ?: "user@example.com"
+    }
+    //поиск
+    private fun setupSearch() {
+        binding.searchEditText.addTextChangedListener(object : TextWatcher {
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            }
+            override fun afterTextChanged(s: Editable?) {
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val notes = s.toString().trim()
+
+                if (notes.isNotEmpty()) {
+                    val filteredList = allNotes.filter { note ->
+                        note.title.contains(notes, ignoreCase = true) ||
+                                note.description.contains(notes, ignoreCase = true)
+                    }
+                    noteAdapter.submitList(filteredList)
+                } else {
+                    noteAdapter.submitList(allNotes)
+                }
+            }
+        })
+    }
+
+
 }

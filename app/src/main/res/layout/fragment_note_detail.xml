@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="#252525"
-    tools:context=".ui.fragments.note.NoteDetailFragment">
+    tools:context=".view.fragments.note.NoteDetailFragment">
 
     <ImageView
         android:id="@+id/btnChangeColor"

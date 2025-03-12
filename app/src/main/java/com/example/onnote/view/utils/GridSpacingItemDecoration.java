@@ -1,4 +1,4 @@
-package com.example.onnote.ui;
+package com.example.onnote.view.utils;
 
 import android.graphics.Rect;
 import android.view.View;

@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".ui.fragments.onBoard.OnBoardPagerFragment">
+    tools:context=".view.fragments.onBoard.OnBoardPagerFragment">
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie_animation"

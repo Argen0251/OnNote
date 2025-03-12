@@ -1,4 +1,4 @@
-package com.example.onnote.ui.fragments.singin
+package com.example.onnote.view.fragments.singin
 
 import android.app.Activity
 import android.content.Intent
@@ -12,7 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentAuthBinding
-import com.example.onnote.ui.utils.PreferenceHelper
+import com.example.onnote.model.PreferenceHelper
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions

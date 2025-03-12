@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/onBoardFragment"
-        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardFragment"
+        android:name="com.example.onnote.view.fragments.onBoard.OnBoardFragment"
         android:label="fragment_on_board"
         tools:layout="@layout/fragment_on_board">
 
@@ -24,12 +24,12 @@
 
     <fragment
         android:id="@+id/onBoardPagerFragment"
-        android:name="com.example.onnote.ui.fragments.onBoard.OnBoardPagerFragment"
+        android:name="com.example.onnote.view.fragments.onBoard.OnBoardPagerFragment"
         android:label="fragment_on_board_pager"
         tools:layout="@layout/fragment_on_board_pager" />
     <fragment
         android:id="@+id/noteFragment"
-        android:name="com.example.onnote.ui.fragments.note.NoteFragment"
+        android:name="com.example.onnote.view.fragments.note.NoteFragment"
         android:label="fragment_note"
         tools:layout="@layout/fragment_note" >
         <action
@@ -60,7 +60,7 @@
     </fragment>
     <fragment
         android:id="@+id/noteDetailFragment"
-        android:name="com.example.onnote.ui.fragments.note.NoteDetailFragment"
+        android:name="com.example.onnote.view.fragments.note.NoteDetailFragment"
         android:label="fragment_note_detail"
         tools:layout="@layout/fragment_note_detail">
 
@@ -70,7 +70,7 @@
     </fragment>
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.onnote.ui.fragments.singin.AuthFragment"
+        android:name="com.example.onnote.view.fragments.singin.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
 </navigation>

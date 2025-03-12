@@ -1,4 +1,4 @@
-package com.example.onnote.ui.fragments.onBoard
+package com.example.onnote.view.fragments.onBoard
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

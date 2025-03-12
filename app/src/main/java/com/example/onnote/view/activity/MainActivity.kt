@@ -1,4 +1,4 @@
-package com.example.onnote.ui.activity
+package com.example.onnote.view.activity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge

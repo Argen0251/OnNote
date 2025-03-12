@@ -1,4 +1,4 @@
-package com.example.onnote.ui.adapters
+package com.example.onnote.view.adapters
 
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
@@ -10,8 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.onnote.databinding.ItemNoteBinding
 import com.example.onnote.databinding.ItemNotegridBinding
-import com.example.onnote.ui.data.models.NoteModels
-import com.example.onnote.ui.interfaces.OnClickIten
+import com.example.onnote.model.data.models.NoteModels
+import com.example.onnote.view.interfaces.OnClickIten
 
 class NoteAdapter(
     private val onLongClick: OnClickIten,

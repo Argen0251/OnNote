@@ -1,10 +1,8 @@
-package com.example.onnote.ui
+package com.example.onnote.view.utils
 import android.app.Application
-import androidx.lifecycle.ViewModelProvider.NewInstanceFactory.Companion.instance
 import androidx.room.Room
-import com.example.onnote.ui.data.db.daos.AppDataBase1
-import com.example.onnote.ui.utils.PreferenceHelper
-import kotlin.reflect.KParameter
+import com.example.onnote.model.data.db.daos.AppDataBase1
+import com.example.onnote.model.PreferenceHelper
 
 class App:Application() {
     companion object{
@@ -17,7 +15,7 @@ class App:Application() {
         getInstance()
     }
     protected fun getInstance(): AppDataBase1?{
-        if (appDatabase1== null){
+        if (appDatabase1 == null){
             appDatabase1 =applicationContext?.let {
                 Room.databaseBuilder(
                     it,

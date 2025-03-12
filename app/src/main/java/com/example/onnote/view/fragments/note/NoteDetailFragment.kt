@@ -1,4 +1,4 @@
-package com.example.onnote.ui.fragments.note
+package com.example.onnote.view.fragments.note
 
 import android.content.Context
 import android.graphics.Color
@@ -11,22 +11,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteDetailBinding
-import com.example.onnote.ui.App
-import com.example.onnote.ui.adapters.NoteAdapter
-import com.example.onnote.ui.data.models.NoteModels
-import com.example.onnote.ui.interfaces.OnClickIten
+import com.example.onnote.view.utils.App
+import com.example.onnote.view.adapters.NoteAdapter
+import com.example.onnote.model.data.models.NoteModels
+import com.example.onnote.presenter.WriteNoteContract
+import com.example.onnote.presenter.WriteNotePresenter
+import com.example.onnote.view.interfaces.OnClickIten
 
-class NoteDetailFragment : Fragment(), OnClickIten {
+class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
 
     private lateinit var bidind: FragmentNoteDetailBinding
     private var noteId = -1
-    private val noteAdapter = NoteAdapter(this, this,true)
     private var selectedBackgroundColor: Int = Color.WHITE
+    private val presenter by lazy { WriteNotePresenter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -156,7 +159,7 @@ class NoteDetailFragment : Fragment(), OnClickIten {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val title = bidind.txtTitle.text.toString().trim()
                 val description = bidind.txtDescription.text.toString().trim()
-                if (title.isNotEmpty() && description.isNotEmpty()) {
+                if (title.isNotEmpty() || description.isNotEmpty()) {
                     bidind.btnAdd.visibility = View.VISIBLE
                 } else {
                     bidind.btnAdd.visibility = View.GONE
@@ -168,10 +171,17 @@ class NoteDetailFragment : Fragment(), OnClickIten {
         bidind.btnAdd.visibility = View.GONE
     }
 
-    override fun onLongClick(noteModels: NoteModels) {
-        TODO("Not yet implemented")
+
+
+    override fun showError(message: String) {
+
     }
 
-    override fun onClick(noteModels: NoteModels) {
-        TODO("Not yet implemented")
-    }}
+    override fun noteSaved() {
+        Toast.makeText(requireContext(), "NoteSaved", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun noteUpdated() {
+        Toast.makeText(requireContext(), "NoteUpdated", Toast.LENGTH_SHORT).show()
+    }
+}

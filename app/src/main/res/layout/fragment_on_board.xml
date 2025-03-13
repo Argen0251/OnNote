@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#252525"
+    tools:context=".view.fragments.onBoard.OnBoardFragment">
+
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        tools:foreground="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginBottom="130dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabBackground="@android:color/transparent"
+        app:tabRippleColor="@android:color/transparent"
+        app:tabSelectedTextColor="#D88802"
+        android:background="@android:color/transparent"
+        />
+    <TextView
+        android:id="@+id/txt_skip"
+        android:text="Пропустить"
+        android:textSize="16dp"
+        android:textStyle="bold"
+        android:layout_gravity="end"
+        android:textColor="#D88802"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Notes"
+        android:fontFamily="@font/potta_one"
+        android:textSize="24dp"
+        android:textColor="@color/white"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="36dp"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_begin"
+            android:layout_width="230dp"
+            android:layout_height="58dp"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="72dp"
+            android:text="Начать"
+            android:textSize="18sp"
+            android:fontFamily="@font/roboto"
+            android:textStyle="bold"
+            android:background="@drawable/btn"/>
+
+</FrameLayout>

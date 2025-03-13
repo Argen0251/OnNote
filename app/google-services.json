@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "883274283063",
+    "project_id": "onnote-d9913",
+    "storage_bucket": "onnote-d9913.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883274283063:android:f047d5cabd06871d1267b2",
+        "android_client_info": {
+          "package_name": "com.example.onnote"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD1Zj3euE9YjuqUq4GuXP-Jj1aF8GTL6I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

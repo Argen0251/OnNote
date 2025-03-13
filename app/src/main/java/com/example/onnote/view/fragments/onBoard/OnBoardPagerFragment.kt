@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.onnote.R
-import com.example.onnote.databinding.FragmentOnBoardBinding
 import com.example.onnote.databinding.FragmentOnBoardPagerBinding
 
 
@@ -21,7 +20,7 @@ class OnBoardPagerFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding= FragmentOnBoardPagerBinding.inflate(inflater,container,false)
         return binding.root
     }

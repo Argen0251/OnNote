@@ -18,18 +18,16 @@ import androidx.navigation.fragment.findNavController
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteDetailBinding
 import com.example.onnote.view.utils.App
-import com.example.onnote.view.adapters.NoteAdapter
 import com.example.onnote.model.data.models.NoteModels
-import com.example.onnote.presenter.WriteNoteContract
-import com.example.onnote.presenter.WriteNotePresenter
-import com.example.onnote.view.interfaces.OnClickIten
+import com.example.onnote.presenter.detail.DetailNoteContract
+import com.example.onnote.presenter.detail.DetailNotePresenter
 
-class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
+class NoteDetailFragment : Fragment(),  DetailNoteContract.View {
 
     private lateinit var bidind: FragmentNoteDetailBinding
     private var noteId = -1
     private var selectedBackgroundColor: Int = Color.WHITE
-    private val presenter by lazy { WriteNotePresenter(this) }
+    private val presenter by lazy { DetailNotePresenter(this) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,7 +40,6 @@ class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupListener()
-        val currentTime = NoteModels.currentTime()
         bidind.txtTime.text = NoteModels.currentTime()
         setupTextWatcher()
         updateNote()
@@ -53,28 +50,24 @@ class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
             noteId = it.getInt("noteId", -1)
         }
         if (noteId != -1) {
-            App.appDatabase1?.noteDao()?.getById(noteId)?.observe(viewLifecycleOwner) { model ->
-                model?.let {
-                    bidind.txtTitle.setText(it.title)
-                    bidind.txtDescription.setText(it.description)
-                    selectedBackgroundColor = it.backgroundColor
-                }
-            }
+            presenter.updateNoteId(noteId)
         }
     }
 
 
+
     private fun setupListener() = with(bidind) {
-        btnAdd.setOnClickListener {
+        btnGotovo.setOnClickListener {
             val edTitle: String = txtTitle.text.toString()
             val edDescription: String = txtDescription.text.toString()
             val currentTime = NoteModels.currentTime()
             if (noteId != -1) {
                 val updateNote = NoteModels(edTitle, edDescription, currentTime, selectedBackgroundColor)
                 updateNote.id = noteId
-                App.appDatabase1?.noteDao()?.updateNote(updateNote)
+                presenter.updateNote(updateNote)
             } else {
-                App.appDatabase1?.noteDao()?.insert(NoteModels(edTitle, edDescription, currentTime, selectedBackgroundColor))
+                val newNote = NoteModels(edTitle, edDescription, currentTime, selectedBackgroundColor)
+                presenter.saveNote(newNote)
             }
 
             findNavController().navigateUp()
@@ -159,18 +152,23 @@ class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 val title = bidind.txtTitle.text.toString().trim()
                 val description = bidind.txtDescription.text.toString().trim()
-                if (title.isNotEmpty() || description.isNotEmpty()) {
-                    bidind.btnAdd.visibility = View.VISIBLE
+                if (title.isNotEmpty() && description.isNotEmpty()) {
+                    bidind.btnGotovo.visibility = View.VISIBLE
                 } else {
-                    bidind.btnAdd.visibility = View.GONE
+                    bidind.btnGotovo.visibility = View.GONE
                 }
             }
         }
         bidind.txtTitle.addTextChangedListener(textWatcher)
         bidind.txtDescription.addTextChangedListener(textWatcher)
-        bidind.btnAdd.visibility = View.GONE
+        bidind.btnGotovo.visibility = View.GONE
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        presenter.removeObserver(noteId)
+    }
 
 
     override fun showError(message: String) {
@@ -183,5 +181,13 @@ class NoteDetailFragment : Fragment(),  WriteNoteContract.View {
 
     override fun noteUpdated() {
         Toast.makeText(requireContext(), "NoteUpdated", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showNote(note: NoteModels) {
+        val safeContext = context ?: return
+        bidind.txtTitle.setText(note.title)
+        bidind.txtDescription.setText(note.description)
+        selectedBackgroundColor = note.backgroundColor
+        Toast.makeText(safeContext, "NoteUpdatedIDDD", Toast.LENGTH_SHORT).show()
     }
 }

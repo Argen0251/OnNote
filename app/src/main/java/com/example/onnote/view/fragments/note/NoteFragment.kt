@@ -18,16 +18,17 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.onnote.R
 import com.example.onnote.databinding.FragmentNoteBinding
-import com.example.onnote.view.utils.App
 import com.example.onnote.view.utils.GridSpacingItemDecoration
 import com.example.onnote.view.adapters.NoteAdapter
 import com.example.onnote.model.data.models.NoteModels
 import com.example.onnote.view.interfaces.OnClickIten
 import com.example.onnote.model.PreferenceHelper
+import com.example.onnote.presenter.note.NoteContract
+import com.example.onnote.presenter.note.NotePresenter
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 
-class NoteFragment : Fragment(), OnClickIten {
+class NoteFragment : Fragment(), OnClickIten, NoteContract.View {
 
     private lateinit var binding: FragmentNoteBinding
     private val shared = PreferenceHelper()
@@ -35,7 +36,9 @@ class NoteFragment : Fragment(), OnClickIten {
     private var isLinearLayout = true
     private lateinit var drawerLayout: DrawerLayout
     private lateinit var navView: NavigationView
-    private lateinit var allNotes: List<NoteModels>
+    private lateinit var allNotes: List<NoteModels>//для поиска
+    private val presenter by lazy { NotePresenter(this) }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -128,9 +131,7 @@ class NoteFragment : Fragment(), OnClickIten {
         }
     }
 
-    fun Int.dpToPx(context: Context): Int {
-        return (this * context.resources.displayMetrics.density).toInt()
-    }
+
 
     private fun initialize() {
         if (isLinearLayout) {
@@ -150,25 +151,23 @@ class NoteFragment : Fragment(), OnClickIten {
         }
         binding.rvNote.adapter = noteAdapter
     }
+    fun Int.dpToPx(context: Context): Int {
+        return (this * context.resources.displayMetrics.density).toInt()
+    }
 
     private fun loadNotes() {
-        App.appDatabase1?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { notes ->
-            noteAdapter.submitList(notes)
-            allNotes = notes
-        }
+        presenter.loadNotes()
     }
 
     private fun getData() {
-        App.appDatabase1?.noteDao()?.getAll()?.observe(viewLifecycleOwner) { listModel: List<NoteModels> ->
-            noteAdapter.submitList(listModel)
-        }
+        presenter.getData()
     }
 
     override fun onLongClick(noteModels: NoteModels) {
         AlertDialog.Builder(requireContext())
             .setTitle("Удалить заметку")
             .setPositiveButton("Удалить") { _, _ ->
-                App.appDatabase1?.noteDao()?.deletNote(noteModels)
+                presenter.deleteNote(noteModels)
             }
             .setNegativeButton("Отмена") { dialog, _ ->
                 dialog.cancel()
@@ -211,6 +210,14 @@ class NoteFragment : Fragment(), OnClickIten {
                 }
             }
         })
+    }
+
+    override fun showError(message: String) {
+    }
+
+    override fun showNotes(notes: List<NoteModels>) {
+        noteAdapter.submitList(notes)
+        allNotes = notes
     }
 
 
